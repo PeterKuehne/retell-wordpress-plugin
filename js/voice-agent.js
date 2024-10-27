@@ -3,7 +3,13 @@ class VoiceAgent {
         this.containerId = containerId;
         this.agentId = config.agentId;
         this.apiUrl = config.apiUrl;
-        this.retellWebClient = new RetellWebClient();
+        
+        // Neue SDK-Referenz
+        if (typeof window.RetellClient === 'undefined' || typeof window.RetellClient.RetellWebClient === 'undefined') {
+            console.error('RetellWebClient ist nicht geladen');
+            return;
+        }
+        this.retellWebClient = new window.RetellClient.RetellWebClient();
         this.isCalling = false;
         
         this.init();
@@ -14,7 +20,6 @@ class VoiceAgent {
         const container = document.getElementById(this.containerId);
         if (!container) return;
 
-        // HTML-Struktur erstellen
         container.innerHTML = `
             <div class="voice-agent-container">
                 <button class="mic-button" aria-label="Voice Chat starten/stoppen">
@@ -109,21 +114,17 @@ class VoiceAgent {
     }
 
     updateUI() {
-        // Mikrofon-Icon aktualisieren
         const micIcon = this.isCalling ? 
             `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>` :
             `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>`;
         
         this.button.innerHTML = micIcon;
         
-        // Text aktualisieren
-        if (this.text.textContent === "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut." ||
-            this.text.textContent === "Fehler beim Starten des Anrufs. Bitte versuchen Sie es erneut.") {
-            return; // Fehlermeldung beibehalten
+        if (this.text.textContent !== "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut." &&
+            this.text.textContent !== "Fehler beim Starten des Anrufs. Bitte versuchen Sie es erneut.") {
+            this.text.textContent = this.isCalling ? 
+                "Anruf läuft... zum Stoppen klicken." :
+                "Klicken Sie hier, um einen Anruf zu starten.";
         }
-        
-        this.text.textContent = this.isCalling ? 
-            "Anruf läuft... zum Stoppen klicken." :
-            "Klicken Sie hier, um einen Anruf zu starten.";
     }
 }
