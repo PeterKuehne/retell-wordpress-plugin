@@ -1,0 +1,68 @@
+.voice-agent-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.mic-button {
+    width: 110px;
+    height: 110px;
+    background-color: #4F46E5;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mic-button:hover {
+    background-color: #4338CA;
+    transform: scale(1.05);
+}
+
+.mic-button:active {
+    transform: scale(0.95);
+}
+
+.mic-button svg {
+    width: 45px;
+    height: 45px;
+    color: white;
+}
+
+.text {
+    text-align: center;
+    font-size: 16px;
+    color: #374151;
+    font-weight: 500;
+}
+
+/* WordPress-spezifische Anpassungen */
+.wp-admin .voice-agent-container {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+    .mic-button {
+        width: 90px;
+        height: 90px;
+    }
+
+    .mic-button svg {
+        width: 35px;
+        height: 35px;
+    }
+
+    .text {
+        font-size: 14px;
+    }
+}

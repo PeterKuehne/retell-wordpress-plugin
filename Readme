@@ -1,0 +1,48 @@
+# Retell Voice Agent WordPress Plugin
+
+Ein WordPress Plugin für die Integration des Retell AI Voice Assistants.
+
+## Installation
+
+1. Laden Sie den Plugin-Ordner in das `/wp-content/plugins/` Verzeichnis hoch
+2. Aktivieren Sie das Plugin im WordPress Admin-Bereich
+3. Gehen Sie zu 'Einstellungen > Voice Agent'
+4. Konfigurieren Sie Ihre Agent ID und Backend URL
+5. Nutzen Sie den Shortcode `[voice_agent]` um den Voice Assistant einzubinden
+
+## Konfiguration
+
+### Erforderliche Einstellungen:
+- Retell Agent ID
+- Backend API URL
+
+### Shortcode Verwendung:
+```php
+[voice_agent]
+```
+
+## Entwicklung
+
+### Setup
+```bash
+# Repository klonen
+git clone [repository-url]
+cd retell-wordpress-plugin
+
+# Abhängigkeiten installieren (falls benötigt)
+npm install
+```
+
+### Dateistruktur
+```
+retell-wordpress-plugin/
+├── css/
+│   └── voice-agent.css      # Styling
+├── js/
+│   └── voice-agent.js       # Voice Agent Logik
+└── retell-voice-agent.php   # Hauptplugin-Datei
+```
+
+## Lizenz
+
+[Ihre gewählte Lizenz]
